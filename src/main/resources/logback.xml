@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<timestamp key="byDate" datePattern="yyyyMMdd"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{76}:%L - %msg[CORR_ID=%X{Correlation-Id}]%n</Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/app-ws-soap.log</file>
+        <append>true</append>
+        <encoder>
+	        <pattern>%date [%thread] %-5level %logger{76}:%line - %msg [CORR_ID=%X{Correlation-Id}]%n</pattern>
+	    </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	        <!-- Daily rollover -->
+	        <fileNamePattern>target/logs/app-ws-soap-%d{yyyy-MM-dd}.log</fileNamePattern>
+	        <!-- Keep 7 days' worth of history -->
+	        <maxHistory>30</maxHistory>
+	    </rollingPolicy>
+    </appender>
+    
+    <appender name="TIMES_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%X{dateTime}|%X{endPointName}|%X{user}|%X{typeDocument}|%X{numberDocument}|%X{state}|%X{errorMessage}|%X{startTimeClient}|%X{endTimeClient}|%X{elapsedTimeClient}|%X{startTimeTotal}|%X{endTimeTotal}|%X{elapsedTimeTotal}%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    
+    <appender name="TIMES_LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+	        <pattern>%X{dateTime}|%X{endPointName}|%X{user}|%X{typeDocument}|%X{numberDocument}|%X{state}|%X{errorMessage}|%X{startTimeClient}|%X{endTimeClient}|%X{elapsedTimeClient}|%X{startTimeTotal}|%X{endTimeTotal}|%X{elapsedTimeTotal}%n</pattern>
+            <charset>utf8</charset>
+	    </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	        <!-- Daily rollover -->
+	        <fileNamePattern>target/logs/app-ws-soap-timelogger-%d{yyyy-MM-dd}.log</fileNamePattern>
+	        <!-- Keep 7 days' worth of history -->
+	        <maxHistory>30</maxHistory>
+	    </rollingPolicy>
+    </appender>
+
+    <logger name="com.admin.soap" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="LOGFILE"/>
+    </logger>
+    
+    <logger name="TIMELOGGER" level="info" additivity="true">
+        <appender-ref ref="TIMES_STDOUT"/>
+        <appender-ref ref="TIMES_LOGFILE"/>
+    </logger>
+    
+    <logger name="org.springframework" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="LOGFILE"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="LOGFILE"/>
+    </root>
+
+</configuration>
