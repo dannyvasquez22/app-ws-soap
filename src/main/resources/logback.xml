@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<timestamp key="byDate" datePattern="yyyyMMdd"/>
-
+	<include resource="org/springframework/boot/logging/logback/logback/defaults.xml" />
+	
+	<springProperty scope="context" name="LOGGING_LEVEL" class="ch.qos.logback.core.ConsoleAppender" source="application.configuration.logback.level" defaultValue="DEBUG" />
+	
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{76}:%L - %msg[CORR_ID=%X{Correlation-Id}]%n</Pattern>
-        </layout>
+            <charset>utf8</charset>
+        </encoder>
     </appender>
     
     <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>target/logs/app-ws-soap.log</file>
-        <append>true</append>
         <encoder>
 	        <pattern>%date [%thread] %-5level %logger{76}:%line - %msg [CORR_ID=%X{Correlation-Id}]%n</pattern>
 	    </encoder>
@@ -43,7 +44,7 @@
 	    </rollingPolicy>
     </appender>
 
-    <logger name="com.admin.soap" level="INFO" additivity="false">
+    <logger name="com.admin.soap" level="${LOGGING_LEVEL}" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="LOGFILE"/>
     </logger>

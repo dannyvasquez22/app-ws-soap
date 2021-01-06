@@ -1,0 +1,25 @@
+{
+  "ruc": "10710305205",
+  "razon_social": "VASQUEZ RAFAEL DANNY JHONATAN",
+  "condicion": "HABIDO",
+  "estado": "ACTIVO",
+  "nombre_comercial": "-",
+  "tipo": "PERSONA NATURAL SIN NEGOCIO",
+  "fecha_inscripcion": "2016-08-15",
+  "direccion": "-",
+  "sistema_emision": "MANUAL",
+  "actividad_exterior": "SIN ACTIVIDAD",
+  "sistema_contabilidad": "MANUAL",
+  "oficio": "99 - PROFESION U OCUPACION NO ESPECIFICADA",
+  "emision_electronica": "2017-12-29",
+  "comprobantes": "RECIBO POR HONORARIO (desde 29/12/2017)",
+  "fecha_inscripcion_ple": "0000-00-00",
+  "fecha_actividad": "2016-08-15",
+  "fecha_baja": "0000-00-00",
+  "actividad_economica": {
+    "9609": "OTRAS ACTIVIDADES DE SERVICIOS PERSONALES N.C.P."
+  },
+  "sucursales": [],
+  "representantes_legales": [],
+  "empleados": []
+}
